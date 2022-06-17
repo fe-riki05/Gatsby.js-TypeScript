@@ -1,5 +1,7 @@
 import type { GatsbyConfig } from "gatsby";
 
+require('dotenv').config()
+
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `My Gatsby Site`,
@@ -17,6 +19,16 @@ const config: GatsbyConfig = {
   }, "gatsby-plugin-sharp", "gatsby-transformer-sharp", {
     resolve: 'gatsby-source-filesystem',
     options: {
+      apiKey: process.env.MICROCMS_API_KEY,
+      serviceId: process.env.MICROCMS_SERVICE_ID,
+      apis: [
+        {
+          endpoint: 'blogs',
+        },
+        {
+          endpoint: 'categories',
+        },
+      ],
       "name": "images",
       "path": "./src/images/"
     },
